@@ -1,16 +1,12 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.mehvahdjukaar.complementaries.mixins",
+  "package": "net.mehvahdjukaar.complementaries.mixin",
   "compatibilityLevel": "JAVA_17",
-  "client": [
-  ],
   "mixins": [
-    "AquiferAccessor",
-    "BeardifierMixin",
-    "MultiNoiseBiomeSourceAccessor",
-    "NoiseAquiferMixin",
-    "NoiseChunkMixin"
+    "TrunkPlacerTypeInvoker"
+  ],
+  "client": [
   ],
   "injectors": {
     "defaultRequire": 1

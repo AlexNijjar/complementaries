@@ -1,26 +1,14 @@
 package net.mehvahdjukaar.complementaries.fabric;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.mehvahdjukaar.complementaries.Complementaries;
-import net.mehvahdjukaar.complementaries.ComplementariesClient;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
-import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.mehvahdjukaar.moonlight.api.platform.fabric.RegHelperImpl;
-import net.mehvahdjukaar.moonlight.fabric.FabricSetupCallbacks;
-import net.minecraft.world.level.levelgen.Aquifer;
-import net.minecraft.world.level.levelgen.Beardifier;
+import net.mehvahdjukaar.complementaries.common.registry.ModEntityTypes;
 
 public class ComplementariesFabric implements ModInitializer {
-
     @Override
     public void onInitialize() {
-
-        Complementaries.commonInit();
-
-        if (PlatformHelper.getEnv().isClient()) {
-            FabricSetupCallbacks.CLIENT_SETUP.add(ComplementariesClient::init);
-        }
-        FabricSetupCallbacks.COMMON_SETUP.add(Complementaries::setup);
-        RegHelperImpl.finishRegistration(Complementaries.MOD_ID);
+        Complementaries.init();
+        ModEntityTypes.onRegisterAttributes((type, builder) -> FabricDefaultAttributeRegistry.register(type.get(), builder.get()));
     }
 }

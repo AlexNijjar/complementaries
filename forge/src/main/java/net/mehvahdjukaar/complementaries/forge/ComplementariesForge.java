@@ -1,47 +1,39 @@
 package net.mehvahdjukaar.complementaries.forge;
 
 import net.mehvahdjukaar.complementaries.Complementaries;
-import net.mehvahdjukaar.complementaries.ComplementariesClient;
-import net.mehvahdjukaar.complementaries.capabilities.ClientBoundSyncAllSaltedMessage;
-import net.mehvahdjukaar.complementaries.capabilities.ModCapabilities;
-import net.mehvahdjukaar.complementaries.common.NetworkHandler;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
-import net.mehvahdjukaar.moonlight.api.platform.network.NetworkDir;
-import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.mehvahdjukaar.complementaries.client.ComplementariesClient;
+import net.mehvahdjukaar.complementaries.client.forge.ComplementariesClientForge;
+import net.mehvahdjukaar.complementaries.common.registry.ModEntityTypes;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-/**
- * Author: MehVahdJukaar
- */
 @Mod(Complementaries.MOD_ID)
 public class ComplementariesForge {
-
     public ComplementariesForge() {
-        Complementaries.commonInit();
-
-        if (PlatformHelper.getEnv().isClient()) {
-            ComplementariesClient.init();
-        }
-
-        NetworkHandler.CHANNEL.register(NetworkDir.PLAY_TO_CLIENT,
-                ClientBoundSyncAllSaltedMessage.class,
-                ClientBoundSyncAllSaltedMessage::new);
-
-        FMLJavaModLoadingContext.get().getModEventBus().register(this);
+        Complementaries.init();
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        bus.addListener(ComplementariesForge::commonSetup);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ComplementariesClientForge::init);
+        bus.addListener(ComplementariesForge::onClientSetup);
+        bus.addListener(ComplementariesForge::onRegisterAttributes);
     }
 
-    @SubscribeEvent
-    public void setup(FMLCommonSetupEvent event){
-        Complementaries.setup();
+    public static void commonSetup(FMLCommonSetupEvent event) {
+        Complementaries.postInit();
+        Complementaries.initTerrablender();
     }
 
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        ComplementariesClient.init();
+    }
 
+     public static void onRegisterAttributes(EntityAttributeCreationEvent event) {
+        ModEntityTypes.onRegisterAttributes((entityType, attribute) -> event.put(entityType.get(), attribute.get().build()));
+    }
 }
-

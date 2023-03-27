@@ -1,16 +1,12 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.mehvahdjukaar.complementaries.mixins.forge",
-  "compatibilityLevel": "JAVA_16",
-  "client": [
-
-  ],
+  "package": "net.mehvahdjukaar.complementaries.mixin.forge",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "NoiseBasedChunkGeneratorMixin",
-    "SpawnPlacementsMixin",
-    "BiomeMixin",
-    "SnowLayerMixin"
+    "AxeItemAccessor"
+  ],
+  "client": [
   ],
   "injectors": {
     "defaultRequire": 1

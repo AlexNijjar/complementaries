@@ -7,57 +7,83 @@ architectury {
     forge()
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDirs += project(":forge").file("src/generated/resources").absolutePath
+            exclude '.cache'
+        }
+    }
+}
 
 loom {
-    accessWidenerPath = project(":common").loom.accessWidenerPath
-
     forge {
-        convertAccessWideners = true
-        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
-
-        mixinConfig  "complementaries-common.mixins.json"
-        mixinConfig  "complementaries.mixins.json"
+        mixinConfig "$project.mod_id-common.mixins.json"
+        mixinConfig "${project.mod_id}.mixins.json"
+        dataGen {
+            mod project.mod_id
+        }
+    }
+    runs {
+        data {
+            programArgs "--existing", project(":common").file("src/main/resources").absolutePath
+        }
     }
 }
 
 configurations {
     common
-    shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+    shadowCommon
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
     developmentForge.extendsFrom common
 }
 
+dependencies {
+    forge "net.minecraftforge:forge:$rootProject.minecraft_version-$rootProject.forge_version"
+
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+
+//    modCompileOnly "mezz.jei:jei-$rootProject.minecraft_version-forge-api:$rootProject.jei_version"
+//    modLocalRuntime("mezz.jei:jei-$rootProject.minecraft_version-forge:$rootProject.jei_version") { transitive = false }
+
+    modApi "com.teamresourceful.resourcefullib:resourcefullib-forge-$rootProject.minecraft_version:$rootProject.resourcefullib_version"
+
+    modApi "com.github.glitchfiend:TerraBlender-forge:$minecraft_version-$terrablender_version"
+
+}
 
 processResources {
-    inputs.property "version", project.version
-    inputs.property "mod_name", project.getArchivesBaseName()
-
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     filesMatching("META-INF/mods.toml") {
-        expand "version": project.version,
-                "mod_name": project.getArchivesBaseName()
+        expand "version": rootProject.version,
+                "github_name": rootProject.github_name,
+                "resourcefullib_version": rootProject.resourcefullib_version,
+                "terrablender_version": rootProject.terrablender_version
     }
 }
 
 shadowJar {
     exclude "fabric.mod.json"
-    exclude "architectury.common.json"
 
     configurations = [project.configurations.shadowCommon]
-    classifier "dev-shadow"
+    archiveClassifier.set "dev-shadow"
 }
 
 remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
-    classifier null
+    archiveClassifier.set null
 }
 
 jar {
-    classifier "dev"
+    archiveClassifier.set "dev"
+    archivesBaseName = "$mod_id-forge-$minecraft_version"
 }
 
 sourcesJar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     def commonSources = project(":common").sourcesJar
     dependsOn commonSources
     from commonSources.archiveFile.map { zipTree(it) }
@@ -67,45 +93,4 @@ components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
     }
-}
-
-publishing {
-    publications {
-        mavenForge(MavenPublication) {
-            artifactId = rootProject.mod_id + "-" + project.name
-            from components.java
-        }
-    }
-
-    repositories {
-        maven {
-            url = "https://www.cursemaven.com"
-            allowInsecureProtocol = true
-        }
-    }
-}
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
-repositories{
-    flatDir {
-        dirs "mods"
-    }
-    mavenCentral()
-}
-
-dependencies {
-    forge "net.minecraftforge:forge:${rootProject.forge_version}"
-
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
-
-    implementation 'org.jetbrains:annotations:22.0.0'
-
-    modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
-    modImplementation ("curse.maven:jei-238222:3884337")
-    modImplementation ("curse.maven:spark-361579:4029757")
-    modImplementation ("curse.maven:configured-457570:4011355")
-    modImplementation("com.github.glitchfiend:TerraBlender-forge:${terrablender_version}")
-
 }

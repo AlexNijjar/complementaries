@@ -1,0 +1,13 @@
+// 1.19.4	2023-03-24T22:43:46.139412	Tags for minecraft:block mod id complementaries
+f3e883c312516fbaa345f5f1914967512fd324d6 data/minecraft/tags/blocks/buttons.json
+f118bc28e9d6ea66f518f5c92f492f34d6721cf4 data/minecraft/tags/blocks/doors.json
+fb851f35b0aa41301b4c1170b3c4f7385c4061c7 data/minecraft/tags/blocks/fence_gates.json
+3e2127bd6951b75f4d01586e5a1e374660469d66 data/minecraft/tags/blocks/fences.json
+9429ea181267484f85a4af3c293d8bb584e6c719 data/minecraft/tags/blocks/leaves.json
+b0da146fe7180ae50d893b8a6b7baa8c373d3de4 data/minecraft/tags/blocks/logs.json
+3bc7bbd9228e820d2bbd8b78ed1e83a5ca716373 data/minecraft/tags/blocks/mineable/axe.json
+f7095ba5544ea8f072427107a63587d4353d81e1 data/minecraft/tags/blocks/pressure_plates.json
+187b1b745c5ab9ee3bf214d101cfd73301f70167 data/minecraft/tags/blocks/saplings.json
+f50f2f9b9b2aacc5815a5b14377904d305cc30d6 data/minecraft/tags/blocks/slabs.json
+dda955d59c6831486bf39750a30dcd3b1df9b816 data/minecraft/tags/blocks/stairs.json
+59202f0974256d19cabac03dbeac541335d116d5 data/minecraft/tags/blocks/trapdoors.json

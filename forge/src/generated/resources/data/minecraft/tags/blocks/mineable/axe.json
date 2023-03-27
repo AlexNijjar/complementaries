@@ -1,0 +1,16 @@
+{
+  "values": [
+    "complementaries:pine_planks",
+    "complementaries:pine_stairs",
+    "complementaries:pine_slab",
+    "complementaries:pine_log",
+    "complementaries:stripped_pine_log",
+    "complementaries:pine_wood",
+    "complementaries:stripped_pine_wood",
+    "complementaries:pine_fence",
+    "complementaries:pine_fence_gate",
+    "complementaries:pine_pressure_plate",
+    "complementaries:pine_door",
+    "complementaries:pine_trapdoor"
+  ]
+}

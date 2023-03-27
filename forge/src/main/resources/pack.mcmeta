@@ -1,7 +1,8 @@
 {
-    "pack": {
-        "description": "Carpeted resources",
-        "pack_format": 6,
-        "_comment": "stuff"
-    }
+  "pack": {
+    "description": "complementaries",
+    "pack_format": 9,
+    "forge:resource_pack_format": 9,
+    "forge:data_pack_format": 10
+  }
 }

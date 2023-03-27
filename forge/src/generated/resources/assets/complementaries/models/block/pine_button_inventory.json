@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "particle": "complementaries:block/pine_planks",
+    "texture": "complementaries:block/pine_planks"
+  }
+}

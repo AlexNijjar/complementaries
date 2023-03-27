@@ -1,0 +1,22 @@
+{
+  "block.complementaries.carpetgrass": "Carpetgrass",
+  "block.complementaries.pine_button": "Pine Button",
+  "block.complementaries.pine_door": "Pine Door",
+  "block.complementaries.pine_fence": "Pine Fence",
+  "block.complementaries.pine_fence_gate": "Pine Fence Gate",
+  "block.complementaries.pine_leaves": "Pine Leaves",
+  "block.complementaries.pine_log": "Pine Log",
+  "block.complementaries.pine_planks": "Pine Planks",
+  "block.complementaries.pine_pressure_plate": "Pine Pressure Plate",
+  "block.complementaries.pine_sapling": "Pine Sapling",
+  "block.complementaries.pine_slab": "Pine Slab",
+  "block.complementaries.pine_stairs": "Pine Stairs",
+  "block.complementaries.pine_trapdoor": "Pine Trapdoor",
+  "block.complementaries.pine_wood": "Pine Wood",
+  "block.complementaries.stripped_pine_log": "Stripped Pine Log",
+  "block.complementaries.stripped_pine_wood": "Stripped Pine Wood",
+  "block.complementaries.ultraviolet": "Ultraviolet",
+  "item.complementaries.weighter_bud": "Weighter Bud",
+  "item.complementaries.weighter_spawn_egg": "Weighter Spawn Egg",
+  "itemGroup.complementaries.main": "Complementaries"
+}

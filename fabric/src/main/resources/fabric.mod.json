@@ -1,31 +1,44 @@
 {
   "schemaVersion": 1,
-  "id": "carpeted",
+  "id": "complementaries",
   "version": "${version}",
-  "name": "Carpeted",
-  "description": "Carpet Stairs",
+  "name": "Complementaries",
+  "description": "",
   "authors": [
-    "Mehvahdjukaar"
+    "MehVahdJukaar",
+    "Plantkillable",
+    "Alex Nijjar"
+  ],
+  "contributors": [
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/complamentaries",
-    "sources": "https://github.com/MehVahdJukaar/complamentaries"
+    "website": "https://www.curseforge.com/minecraft/mc-mods/complementaries",
+    "repo": "https://github.com/MehVahdJukaar/${github_name}",
+    "issues": "https://github.com/MehVahdJukaar/${github_name}/issues"
   },
-  "license": "ARR",
+  "license": "All Rights Reserved",
   "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.mehvahdjukaar.complementaries.fabric.ComplementariesFabric"
+      "net.mehvahdjukaar.complementaries.fabric.ComplementariesFabric",
+      "net.mehvahdjukaar.complementaries.Complementaries::postInit"
+    ],
+    "client": [
+      "net.mehvahdjukaar.complementaries.client.fabric.ComplementariesClientFabric"
+    ],
+    "terrablender": [
+      "net.mehvahdjukaar.complementaries.fabric.TerrablenderEntrypoint"
     ]
   },
   "mixins": [
-    "${mod_id}.mixins.json",
-    "${mod_id}-common.mixins.json"
+    "complementaries.mixins.json",
+    "complementaries-common.mixins.json"
   ],
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.19.2",
-    "moonlight": ">=1.19.2-2.0.35"
+    "minecraft": ">=1.19",
+    "resourcefullib": ">=${resourcefullib_version}",
+    "terrablender": ">=${terrablender_version}"
   }
 }
